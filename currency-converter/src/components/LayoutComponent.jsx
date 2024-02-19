@@ -36,22 +36,33 @@ function LayoutComponent() {
 
   const handleConvert = () => {
     if (exchangeRates && exchangeRates.rates && selectedCurrency) {
-      const conversionRate = exchangeRates.rates[selectedCurrency];
-      if (conversionRate) {
-        const result = parseFloat(inputValue) * conversionRate;
-        setConversionResult(result.toFixed(2));
-      }
+      calculateConversion();
+    }
+  };
+
+  const calculateConversion = () => {
+    // Convert input value from SEK to USD
+    const sekToUsdRate = exchangeRates.rates['SEK'];
+    const inputInUsd = parseFloat(inputValue) / sekToUsdRate;
+
+    // Calculate conversion to selected currency
+    const conversionRate = exchangeRates.rates[selectedCurrency];
+    if (conversionRate) {
+      const result = inputInUsd * conversionRate;
+      setConversionResult({
+        amount: result.toFixed(2),
+        currency: selectedCurrency
+      });
     }
   };
 
   return (
     <div>
       <header>
-        <h1>Currency Exchange Rates</h1>
+        <h2>Currency Exchange Converter</h2>
       </header>
       <main>
         <div>
-          <h2>Enter numerical value:</h2>
           <CurrencyInput value={inputValue} onChange={handleInputChange} /> SEK
         </div>
         <div>
@@ -68,7 +79,7 @@ function LayoutComponent() {
           </select>
         </div>
         <ConvertButton onClick={handleConvert} />
-        {conversionResult && <ConversionResult result={conversionResult} />}
+        {conversionResult && <ConversionResult result={conversionResult.amount} currency={conversionResult.currency} />}
       </main>
       <footer>{/* Footer content */}</footer>
     </div>

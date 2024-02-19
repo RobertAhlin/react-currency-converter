@@ -1,9 +1,9 @@
 import React from 'react';
 
-const ConversionResult = ({ result, selectedCurrency }) => {
+const ConversionResult = ({ result, currency }) => {
   return (
     <p>
-      Conversion Result: {result} {selectedCurrency}
+      Conversion Result: {result} {currency}
     </p>
   );
 };
