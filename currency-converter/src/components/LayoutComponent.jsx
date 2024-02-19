@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { fetchExchangeRates } from '../api/ApiService';
 import CurrencyInput from './CurrencyInput';
-import RadioButtonsComponent from './RadioButtonsComponent';
 import ConvertButton from './ConvertButton';
 import ConversionResult from './ConversionResult';
-
-const currencyOptions = ['EUR', 'GBP', 'CAD', 'USD'];
 
 function LayoutComponent() {
   const [exchangeRates, setExchangeRates] = useState(null);
   const [error, setError] = useState(null);
   const [inputValue, setInputValue] = useState('');
-  const [selectedCurrency, setSelectedCurrency] = useState(currencyOptions[0]);
+  const [selectedCurrency, setSelectedCurrency] = useState('');
   const [conversionResult, setConversionResult] = useState(null);
 
   useEffect(() => {
@@ -38,8 +35,8 @@ function LayoutComponent() {
   };
 
   const handleConvert = () => {
-    if (exchangeRates && exchangeRates.quotes) {
-      const conversionRate = exchangeRates.quotes[`SEK${selectedCurrency}`];
+    if (exchangeRates && exchangeRates.rates && selectedCurrency) {
+      const conversionRate = exchangeRates.rates[selectedCurrency];
       if (conversionRate) {
         const result = parseFloat(inputValue) * conversionRate;
         setConversionResult(result.toFixed(2));
@@ -54,36 +51,26 @@ function LayoutComponent() {
       </header>
       <main>
         <div>
-          <h2>Exchange Rates</h2>
-          {exchangeRates && exchangeRates.quotes && (
-            <p>
-              {Object.entries(exchangeRates.quotes).map(([currencyPair, rate], index, arr) => (
-                <React.Fragment key={currencyPair}>
-                  {`${currencyPair}: ${rate}`}
-                  {index !== arr.length - 1 && ' | '}
-                </React.Fragment>
-              ))}
-            </p>
-          )}
-        </div>
-        <div>
           <h2>Enter numerical value:</h2>
-          <CurrencyInput value={inputValue} onChange={handleInputChange} />
+          <CurrencyInput value={inputValue} onChange={handleInputChange} /> SEK
         </div>
         <div>
-          <h2>Select currency to convert:</h2>
-          <RadioButtonsComponent
-            options={currencyOptions}
-            selectedOption={selectedCurrency}
-            onChange={handleCurrencyChange}
-          />
+          <h3>Convert to:</h3>
+          <select value={selectedCurrency} onChange={handleCurrencyChange}>
+            <option value="">Select Currency</option>
+            {exchangeRates &&
+              exchangeRates.rates &&
+              Object.keys(exchangeRates.rates).map((currency) => (
+                <option key={currency} value={currency}>
+                  {currency}
+                </option>
+              ))}
+          </select>
         </div>
         <ConvertButton onClick={handleConvert} />
         {conversionResult && <ConversionResult result={conversionResult} />}
       </main>
-      <footer>
-        {/* Footer content */}
-      </footer>
+      <footer>{/* Footer content */}</footer>
     </div>
   );
 }

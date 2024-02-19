@@ -72,3 +72,7 @@ In components folder I added five components.
 3. CurrencyInput.jsx
 4. LayoutComponent.jsx
 5. ErrorComponent.jsx
+
+# API
+I used the Open Exchange Rate API to get updated currency exchange rates.  
+(I hade to change from CurrencyLayer API that only allowed 100 request per month, and I soon did that when testing.)
