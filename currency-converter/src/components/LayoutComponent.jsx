@@ -6,19 +6,17 @@ import ConversionResult from './ConversionResult';
 
 function LayoutComponent() {
   const [exchangeRates, setExchangeRates] = useState(null);
-  const [error, setError] = useState(null);
   const [inputValue, setInputValue] = useState('');
   const [selectedCurrency, setSelectedCurrency] = useState('');
   const [conversionResult, setConversionResult] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await fetchExchangeRates();
-        console.log('Exchange rates response:', data);
         setExchangeRates(data);
       } catch (error) {
-        console.error('Error fetching exchange rates:', error);
         setError(error);
       }
     };
@@ -41,12 +39,10 @@ function LayoutComponent() {
   };
 
   const calculateConversion = () => {
-    // Convert input value from SEK to USD
     const sekToUsdRate = exchangeRates.rates['SEK'];
     const inputInUsd = parseFloat(inputValue) / sekToUsdRate;
-
-    // Calculate conversion to selected currency
     const conversionRate = exchangeRates.rates[selectedCurrency];
+    
     if (conversionRate) {
       const result = inputInUsd * conversionRate;
       setConversionResult({
@@ -57,15 +53,15 @@ function LayoutComponent() {
   };
 
   return (
-    <div>
+    <div className="layout-container">
       <header>
-        <h2>Currency Exchange Converter</h2>
+        <h1>Currency Exchange Converter</h1>
       </header>
       <main>
-        <div>
+        <div className="input-section">
           <CurrencyInput value={inputValue} onChange={handleInputChange} /> SEK
         </div>
-        <div>
+        <div className="currency-dropdown">
           <h3>Convert to:</h3>
           <select value={selectedCurrency} onChange={handleCurrencyChange}>
             <option value="">Select Currency</option>
@@ -80,8 +76,8 @@ function LayoutComponent() {
         </div>
         <ConvertButton onClick={handleConvert} />
         {conversionResult && <ConversionResult result={conversionResult.amount} currency={conversionResult.currency} />}
+        {error && <div className="error-message">{error.message}</div>}
       </main>
-      <footer>{/* Footer content */}</footer>
     </div>
   );
 }

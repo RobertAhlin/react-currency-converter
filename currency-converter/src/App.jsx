@@ -16,6 +16,7 @@ function App() {
         setExchangeRates(data);
       } catch (error) {
         console.error('Error fetching exchange rates:', error);
+        // Implement error handling, e.g., set an error state
       }
     };
 
