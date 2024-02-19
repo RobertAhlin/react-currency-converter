@@ -1,17 +1,23 @@
 import React from 'react';
+import CurrencyInput from './CurrencyInput';
+import ConvertButton from './ConvertButton';
+import ConversionResult from './ConversionResult';
+import ErrorComponent from './ErrorComponent';
 
-function LayoutComponent() {
+function LayoutComponent({ currencyValue, onCurrencyChange, onConversion }) {
   return (
     <div>
-      {/* Här kan du placera din huvudlayout, sidhuvud och sidfot */}
       <header>
-        <h1>Valutakonverterare</h1>
+        <h1>Currency Converter</h1>
       </header>
       <main>
-        {/* Här kommer andra komponenter att placeras */}
+        <CurrencyInput value={currencyValue} onChange={onCurrencyChange} />
+        <ConvertButton onClick={onConversion} />
+        <ConversionResult />
+        <ErrorComponent />
       </main>
       <footer>
-        {/* Här kan du placera fotnoter eller andra element */}
+        {/* Footer content */}
       </footer>
     </div>
   );
