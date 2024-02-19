@@ -1,12 +1,7 @@
-// ConversionResult.js
 import React from 'react';
 
-function ConversionResult(props) {
-  return (
-    <div>
-      <p>Converted amount: {props.convertedAmount} {props.currency}</p>
-    </div>
-  );
-}
+const ConversionResult = ({ result }) => {
+  return <p>Conversion Result: {result}</p>;
+};
 
 export default ConversionResult;

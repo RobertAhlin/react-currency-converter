@@ -1,38 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import LayoutComponent from './components/LayoutComponent';
-import { fetchExchangeRates } from './api/ApiService'; // Import the fetchExchangeRates function
+import { fetchExchangeRates } from './api/ApiService';
 import './App.css';
 
+const API_KEY = '9fbac0605ee99c619e7579287f2cfdf1';
+
 function App() {
-  const [currencyValue, setCurrencyValue] = useState('');
   const [exchangeRates, setExchangeRates] = useState({});
-  const API_KEY = '9fbac0605ee99c619e7579287f2cfdf1';
 
   useEffect(() => {
-    // Fetch exchange rates from the API
-    fetchExchangeRates(API_KEY)
-      .then(data => {
-        console.log('Exchange rates response:', data); // Log the response data to the console
+    const fetchData = async () => {
+      try {
+        const data = await fetchExchangeRates(API_KEY);
+        console.log('Exchange rates response:', data);
         setExchangeRates(data);
-      })
-      .catch(error => {
+      } catch (error) {
         console.error('Error fetching exchange rates:', error);
-      });
-  }, [API_KEY]);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleCurrencyChange = (event) => {
-    setCurrencyValue(event.target.value);
+    console.log(event.target.value);
+    // Implement currency change logic here if needed
   };
 
   const handleConversion = () => {
-    console.log(currencyValue);
+    console.log('Perform conversion logic here');
     // Implement currency conversion logic here
   };
 
   return (
     <div className="App">
       <LayoutComponent
-        currencyValue={currencyValue}
         exchangeRates={exchangeRates}
         onCurrencyChange={handleCurrencyChange}
         onConversion={handleConversion}

@@ -1,9 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { fetchExchangeRates } from '../api/ApiService';
+import CurrencyInput from './CurrencyInput';
+import RadioButtonsComponent from './RadioButtonsComponent';
+import ConvertButton from './ConvertButton';
+import ConversionResult from './ConversionResult';
+
+const currencyOptions = ['EUR', 'GBP', 'CAD', 'USD'];
 
 function LayoutComponent() {
   const [exchangeRates, setExchangeRates] = useState(null);
   const [error, setError] = useState(null);
+  const [inputValue, setInputValue] = useState('');
+  const [selectedCurrency, setSelectedCurrency] = useState(currencyOptions[0]);
+  const [conversionResult, setConversionResult] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,15 +29,33 @@ function LayoutComponent() {
     fetchData();
   }, []);
 
+  const handleInputChange = (value) => {
+    setInputValue(value);
+  };
+
+  const handleCurrencyChange = (event) => {
+    setSelectedCurrency(event.target.value);
+  };
+
+  const handleConvert = () => {
+    if (exchangeRates && exchangeRates.quotes) {
+      const conversionRate = exchangeRates.quotes[`SEK${selectedCurrency}`];
+      if (conversionRate) {
+        const result = parseFloat(inputValue) * conversionRate;
+        setConversionResult(result.toFixed(2));
+      }
+    }
+  };
+
   return (
     <div>
       <header>
         <h1>Currency Exchange Rates</h1>
       </header>
       <main>
-        {exchangeRates && exchangeRates.quotes && (
-          <div>
-            <h2>Exchange Rates</h2>
+        <div>
+          <h2>Exchange Rates</h2>
+          {exchangeRates && exchangeRates.quotes && (
             <p>
               {Object.entries(exchangeRates.quotes).map(([currencyPair, rate], index, arr) => (
                 <React.Fragment key={currencyPair}>
@@ -37,8 +64,22 @@ function LayoutComponent() {
                 </React.Fragment>
               ))}
             </p>
-          </div>
-        )}
+          )}
+        </div>
+        <div>
+          <h2>Enter numerical value:</h2>
+          <CurrencyInput value={inputValue} onChange={handleInputChange} />
+        </div>
+        <div>
+          <h2>Select currency to convert:</h2>
+          <RadioButtonsComponent
+            options={currencyOptions}
+            selectedOption={selectedCurrency}
+            onChange={handleCurrencyChange}
+          />
+        </div>
+        <ConvertButton onClick={handleConvert} />
+        {conversionResult && <ConversionResult result={conversionResult} />}
       </main>
       <footer>
         {/* Footer content */}
