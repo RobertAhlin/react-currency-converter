@@ -3,6 +3,7 @@ import { fetchExchangeRates } from '../api/ApiService';
 import CurrencyInput from './CurrencyInput';
 import ConvertButton from './ConvertButton';
 import ConversionResult from './ConversionResult';
+import ErrorComponent from './ErrorComponent';
 
 function LayoutComponent() {
   const [exchangeRates, setExchangeRates] = useState(null);
@@ -76,7 +77,7 @@ function LayoutComponent() {
         </div>
         <ConvertButton onClick={handleConvert} />
         {conversionResult && <ConversionResult result={conversionResult.amount} currency={conversionResult.currency} />}
-        {error && <div className="error-message">{error.message}</div>}
+        {error && <ErrorComponent message={error.message} />}
       </main>
     </div>
   );

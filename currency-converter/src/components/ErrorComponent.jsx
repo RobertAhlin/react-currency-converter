@@ -1,11 +1,11 @@
 import React from 'react';
 
-function ErrorComponent(props) {
+const ErrorComponent = ({ message }) => {
   return (
-    <div>
-      <p>{props.errorMessage}</p>
+    <div className="error-message">
+      <p>{message}</p>
     </div>
   );
-}
+};
 
 export default ErrorComponent;

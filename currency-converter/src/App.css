@@ -6,5 +6,29 @@
 }
 
 body {
-  background-color: #d9e3ec; /* Light blue color */
+  background-color: #d9e3ec;
+}
+
+.input-section input {
+  width: 50%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.currency-dropdown select {
+  width: 30%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+/* Additional styles to improve usability on touchscreens */
+.input-section input:focus,
+.currency-dropdown select:focus {
+  outline: none; /* Remove the default focus outline */
+  border-color: #4caf50; /* Change border color when focused */
 }
