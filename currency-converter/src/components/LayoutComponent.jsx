@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import CurrencyInput from './CurrencyInput';
 import ConvertButton from './ConvertButton';
 import ConversionResult from './ConversionResult';
 import ErrorComponent from './ErrorComponent';
+import { fetchExchangeRates } from '../api/ApiService'; // Adjust the path as per your project structure
 
 function LayoutComponent({ currencyValue, onCurrencyChange, onConversion }) {
+  const [exchangeRates, setExchangeRates] = useState({});
+  const API_KEY = '9fbac0605ee99c619e7579287f2cfdf1';
+
+  useEffect(() => {
+    fetchExchangeRates(API_KEY)
+      .then(data => {
+        setExchangeRates(data);
+      })
+      .catch(error => {
+        console.error('Error fetching exchange rates:', error);
+      });
+  }, [API_KEY]);
+
   return (
     <div>
       <header>
@@ -13,7 +27,7 @@ function LayoutComponent({ currencyValue, onCurrencyChange, onConversion }) {
       <main>
         <CurrencyInput value={currencyValue} onChange={onCurrencyChange} />
         <ConvertButton onClick={onConversion} />
-        <ConversionResult />
+        <ConversionResult exchangeRates={exchangeRates} />
         <ErrorComponent />
       </main>
       <footer>
