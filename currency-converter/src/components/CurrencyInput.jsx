@@ -1,13 +1,15 @@
 import React from 'react';
 
-function CurrencyInput(props) {
+function CurrencyInput({ value, onChange, currencies, selectedCurrency, onSelectCurrency }) {
   return (
     <div>
-      <label htmlFor="amount">Amount:</label>
-      <input type="number" id="amount" value={props.amount} onChange={props.onChange} />
-      <select value={props.currency} onChange={props.onCurrencyChange}>
-        {/* Här kan du lägga till alternativ för olika valutor */}
+      <label htmlFor="currency">Currency:</label>
+      <select id="currency" value={selectedCurrency} onChange={onSelectCurrency}>
+        {currencies.map(currency => (
+          <option key={currency} value={currency}>{currency}</option>
+        ))}
       </select>
+      <input type="number" value={value} onChange={onChange} />
     </div>
   );
 }

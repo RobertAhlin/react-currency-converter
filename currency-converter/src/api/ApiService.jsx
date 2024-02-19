@@ -1,16 +1,32 @@
-function fetchExchangeRates(API_KEY) {
-    return fetch(`https://api.currencylayer.com/live?access_key=${API_KEY}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch exchange rates');
-        }
-        return response.json();
-      })
-      .then(data => data.quotes)
-      .catch(error => {
-        console.error('Error fetching exchange rates:', error);
-        throw error;
-      });
+const API_KEY = '9fbac0605ee99c619e7579287f2cfdf1';
+const currencies = 'EUR,GBP,CAD,USD';
+const source = 'SEK';
+const format = 1;
+
+export async function fetchExchangeRates() {
+  const url = `http://apilayer.net/api/live?access_key=${API_KEY}&currencies=${currencies}&source=${source}&format=${format}`;
+  
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
   }
   
-  export { fetchExchangeRates };
+  return response.json();
+}
+
+export async function fetchCurrencies() {
+  const url = `http://apilayer.net/api/live?access_key=${API_KEY}&format=${format}`;
+  
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  
+  const data = await response.json();
+  
+  if (!data || !data.quotes) {
+    throw new Error('Currencies data is not available');
+  }
+  
+  return data;
+}

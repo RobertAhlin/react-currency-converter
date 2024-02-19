@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import LayoutComponent from './components/LayoutComponent';
-import { fetchExchangeRates } from './api/ApiService';
+import { fetchExchangeRates } from './api/ApiService'; // Import the fetchExchangeRates function
 import './App.css';
 
 function App() {
@@ -9,12 +9,14 @@ function App() {
   const API_KEY = '9fbac0605ee99c619e7579287f2cfdf1';
 
   useEffect(() => {
+    // Fetch exchange rates from the API
     fetchExchangeRates(API_KEY)
       .then(data => {
+        console.log('Exchange rates response:', data); // Log the response data to the console
         setExchangeRates(data);
       })
       .catch(error => {
-        console.error('Error setting exchange rates:', error);
+        console.error('Error fetching exchange rates:', error);
       });
   }, [API_KEY]);
 
@@ -40,4 +42,3 @@ function App() {
 }
 
 export default App;
-
