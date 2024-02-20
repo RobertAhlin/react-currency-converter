@@ -1,6 +1,6 @@
 # Web Development with React
 ### Assignment 1
-<img src="./readmefiles/currency-exchange-converter_01.jpg">
+<img src="../readmefiles/currency-exchange-converter_01.jpg">
 
 ## Preface
 ### Välkommen till Laboration 1 i Webbutveckling i React
@@ -32,7 +32,7 @@ ran command: `npm init vite@latest`
 `npm install` to install dependencies.  
 Test start App with `npm run dev`
 Application verified running at http://localhost:5173/  
-<img src="./readmefiles/vite-react.jpg">
+<img src="../readmefiles/vite-react.jpg">
 
 # Structure
 In src folder, I added "components folder".  
@@ -44,7 +44,7 @@ In components folder I added five components.
 5. ErrorComponent.jsx
 
 Component view using Sapling:  
-<img src="./readmefiles/sapling.jpg">
+<img src="../readmefiles/sapling.jpg">
 
 # API
 I used the Open Exchange Rate API to get updated currency exchange rates.  
@@ -72,7 +72,7 @@ This error handling mechanism ensures that users are prompted to provide necessa
 1. Entering any value in the InputField as SEK.
 2. Select what currency to convert to.
 3. Click "Convert" button.  
-<img src="./readmefiles/currency-exchange-converter_02.jpg">
+<img src="../readmefiles/currency-exchange-converter_02.jpg">
 
 # Checking assessment criteria
 
@@ -116,7 +116,7 @@ Therefore, the code meets the requirement of using hooks correctly.
 Yes. But Vite as your build tool, which typically uses `dev` for development server and `build` for creating a production build.
 I added `"start": "vite",` to the package.json file to meet the requrement.  
 No errors in console:  
-<img src="./readmefiles/clean-console.jpg">
+<img src="../readmefiles/clean-console.jpg">
 
 ### For grade VG
 
@@ -137,7 +137,7 @@ Yes.
 
 * Uniformly formatted code (Use the https://prettier.io/ extension in VS Code).  
 Yes, Prettier is installed and utilized:  
-<img src="./readmefiles/prettier.jpg">
+<img src="../readmefiles/prettier.jpg">
 
 # Finalizing.
 Project saved at GitHub. No "build" made
