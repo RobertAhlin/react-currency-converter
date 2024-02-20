@@ -42,6 +42,9 @@ In components folder I added five components.
 4. LayoutComponent.jsx
 5. ErrorComponent.jsx
 
+Component view using Sapling:  
+<img src="./readmefiles/sapling.jpg">
+
 # API
 I used the Open Exchange Rate API to get updated currency exchange rates.  
 (I had to change from CurrencyLayer API that only allowed 100 request per month, and I soon did reach 100 request when developing.)
