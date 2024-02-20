@@ -1,4 +1,5 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 const CurrencyInput = ({ value, onChange }) => {
   const inputRef = useRef(null);
@@ -25,6 +26,11 @@ const CurrencyInput = ({ value, onChange }) => {
       placeholder="Enter numerical value"
     />
   );
+};
+
+CurrencyInput.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default CurrencyInput;

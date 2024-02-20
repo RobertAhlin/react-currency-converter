@@ -1,4 +1,4 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 
 const ConversionResult = ({ result, currency }) => {
   return (
@@ -6,6 +6,11 @@ const ConversionResult = ({ result, currency }) => {
       Conversion Result: {result} {currency}
     </p>
   );
+};
+
+ConversionResult.propTypes = {
+  result: PropTypes.number.isRequired,
+  currency: PropTypes.string.isRequired,
 };
 
 export default ConversionResult;

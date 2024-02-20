@@ -75,4 +75,47 @@ In components folder I added five components.
 
 # API
 I used the Open Exchange Rate API to get updated currency exchange rates.  
-(I hade to change from CurrencyLayer API that only allowed 100 request per month, and I soon did that when testing.)
+(I hade to change from CurrencyLayer API that only allowed 100 request per month, and I soon did that when developing.)
+
+# Checking assessment criteria
+
+### For grade G
+* Set up a React project using `create-react-app` or Vite.  
+Yes, used Vite as described in the Getting started section
+
+* At least 3 function components  
+Yes, I'm using 4.
+    - CurrencyInput: This component handles the input for entering the currency value.
+    - ConvertButton: This component represents the button used to trigger the currency conversion.
+    - ConversionResult: This component displays the result of the currency conversion.
+    - ErrorComponent: This component is used to display error messages when there are errors in the application.
+
+* Recieve and inect at least one prop
+Yes, there are several. For example:  
+    - CurrencyInput: Takes in the `value` and `onChange` props.
+    - ConversionResult: Takes in the `result` and `currency` props.
+    - ErrorComponent: Takes in the `message` prop.
+
+* Handle at least one even:
+Yes, for example, the event handling occurs in the `handleConvert` function within the `LayoutComponent` component:
+```
+const handleConvert = () => {
+  if (exchangeRates && exchangeRates.rates && selectedCurrency) {
+    calculateConversion();
+  }
+};
+```
+
+* Använd ett formulärsfält och spara innehåll till state
+
+* Använd hooks (på ett korrekt sätt): useState & useEffect
+
+* Projektet skall starta efter npm/yarn install & npm/yarn start utan några konsoll-fel
+
+### För VG
+
+* Använd hooks: useRef
+
+* Minst 5 komponenter
+
+* Enhetligt formaterad kod (Använd https://prettier.io/ extension i VS Code)

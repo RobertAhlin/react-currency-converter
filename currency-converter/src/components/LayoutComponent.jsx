@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { fetchExchangeRates } from '../api/ApiService';
 import CurrencyInput from './CurrencyInput';
 import ConvertButton from './ConvertButton';
@@ -33,7 +33,18 @@ function LayoutComponent() {
     setSelectedCurrency(event.target.value);
   };
 
+    // Error handling if faulty user behaving.
   const handleConvert = () => {
+    if (!inputValue) {
+      setError(new Error('Please enter a value in SEK.'));
+      return;
+    }
+  
+    if (!selectedCurrency) {
+      setError(new Error('Please select a currency from the dropdown menu.'));
+      return;
+    }
+  
     if (exchangeRates && exchangeRates.rates && selectedCurrency) {
       calculateConversion();
     }
@@ -66,8 +77,7 @@ function LayoutComponent() {
           <h3>Convert to:</h3>
           <select value={selectedCurrency} onChange={handleCurrencyChange}>
             <option value="">Select Currency</option>
-            {exchangeRates &&
-              exchangeRates.rates &&
+            {exchangeRates && exchangeRates.rates &&
               Object.keys(exchangeRates.rates).map((currency) => (
                 <option key={currency} value={currency}>
                   {currency}
@@ -76,7 +86,12 @@ function LayoutComponent() {
           </select>
         </div>
         <ConvertButton onClick={handleConvert} />
-        {conversionResult && <ConversionResult result={conversionResult.amount} currency={conversionResult.currency} />}
+        {conversionResult && (
+          <ConversionResult
+            result={parseFloat(conversionResult.amount)} // Convert the result to a number
+            currency={conversionResult.currency}
+          />
+        )}
         {error && <ErrorComponent message={error.message} />}
       </main>
     </div>
