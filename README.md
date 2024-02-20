@@ -1,4 +1,5 @@
-# Assignment 1 - Web Development with React at IT-Högskolan.
+# Web Development with React
+### Assignment 1
 <img src="./readmefiles/currency-exchange-converter_01.jpg">
 
 ## Preface
@@ -48,6 +49,8 @@ Component view using Sapling:
 # API
 I used the Open Exchange Rate API to get updated currency exchange rates.  
 (I had to change from CurrencyLayer API that only allowed 100 request per month, and I soon did reach 100 request when developing.)
+# Version control.
+Using GitHub with commits and push to save work.
 
 # Error handling
 In the code, there are two main error handling mechanisms:
@@ -115,7 +118,7 @@ I added `"start": "vite",` to the package.json file to meet the requrement.
 No errors in console:  
 <img src="./readmefiles/clean-console.jpg">
 
-### För VG
+### For grade VG
 
 * Use hook: useRef  
 Yes, the `useRef` hook is being used in the `CurrencyInput` component to create a reference to the input field. 
@@ -135,3 +138,6 @@ Yes.
 * Uniformly formatted code (Use the https://prettier.io/ extension in VS Code).  
 Yes, Prettier is installed and utilized:  
 <img src="./readmefiles/prettier.jpg">
+
+# Finalizing.
+Project saved at GitHub. No "build" made
