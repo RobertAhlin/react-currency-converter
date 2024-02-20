@@ -1,34 +1,28 @@
-# Välkommen till Laboration 1 i Webbutveckling i React
+# Assignment 1 
+Web Development with React at IT-Högskolan.
+<img src="./readmefiles/vite-react.jpg">
+## Preface
+### Välkommen till Laboration 1 i Webbutveckling i React
 Projektet är ett individuellt arbete.
-Ni får välja själva vilken webbsida/applikation ni ska göra men nedan krav ska uppfyllas och ni måste skapa ett github repository för ert projekt.
-
-Tänk på att hela tiden göra "commit" samt en "push", om ni är osäkra på hur man hanterar detta så är mitt tips att ni kikar på denna tutorial igen https://app.pluralsight.com/library/courses/github-getting-started/table-of-contents
-
+Ni får välja själva vilken webbsida/applikation ni ska göra men nedan krav ska uppfyllas och ni måste skapa ett github repository för ert projekt.  
+Tänk på att hela tiden göra "commit" samt en "push", om ni är osäkra på hur man hanterar detta så är mitt tips att ni kikar på denna tutorial igen https://app.pluralsight.com/library/courses/github-getting-started/table-of-contents  
 Vänligen lämna in en länk till ert Github repository
 
-För G
-
-Sätta upp ett React projekt med create-react-app eller med Vite
-
-Minst 3 funktionskomponenter
-
-Ta emot och "injicera"” minst en prop
-
-Hantera minst ett event
-
-Använd ett formulärsfält och spara innehåll till state
-
-Använd hooks (på ett korrekt sätt): useState & useEffect
-
-Projektet skall starta efter npm/yarn install & npm/yarn start utan några konsoll-fel
+# För G
+* Sätta upp ett React projekt med create-react-app eller med Vite
+* Minst 3 funktionskomponenter
+* Ta emot och "injicera"” minst en prop
+* Hantera minst ett event
+* Använd ett formulärsfält och spara innehåll till state
+* Använd hooks (på ett korrekt sätt): useState & useEffect
+* Projektet skall starta efter npm/yarn install & npm/yarn start utan några konsoll-fel
 
 För VG
+* Använd hooks: useRef
+* Minst 5 komponenter
+* Enhetligt formaterad kod (Använd https://prettier.io/ extension i VS Code)
 
-Använd hooks: useRef
-Minst 5 komponenter
-Enhetligt formaterad kod (Använd https://prettier.io/ extension i VS Code)
-
-# Currency Converter
+# Project
 Project idea is a currency converter, using any currency converter API such as CurrencyLayer or ExchangeRate-API to get current excange rate.
 
 ## Getting started
@@ -106,16 +100,38 @@ const handleConvert = () => {
 };
 ```
 
-* Använd ett formulärsfält och spara innehåll till state
+* Use a form field an save the content to state
+Yes, I have a form field represented by the `CurrencyInput` component, and its value is controlled by the `inputValue` state variable. The `handleInputChange` function is responsible for updating the `inputValue` state when the content of the form field changes.  
 
-* Använd hooks (på ett korrekt sätt): useState & useEffect
+* Use hooks (in a correct way): useState & useEffect
+Yes, the code utilizes hooks, specifically `useState` and `useEffect`, in an appropriate manner.
+    - `useState` is used to manage state variables such as `exchangeRates`, `inputValue`, `selectedCurrency`, `conversionResult`, and `error`.
+    - `useEffect` is used to perform side effects, such as fetching exchange rates from an API and updating state accordingly.  
+Therefore, the code meets the requirement of using hooks correctly.
 
-* Projektet skall starta efter npm/yarn install & npm/yarn start utan några konsoll-fel
+* Project run with npm/yarn install and npm/yarn start without any console errors
+Yes. But Vite as your build tool, which typically uses `dev` for development server and `build` for creating a production build.
+I added `"start": "vite",` to the package.json file to meet the requrement.  
+No errors in console:  
+<img src="./readmefiles/clean-console.jpg">
 
 ### För VG
 
-* Använd hooks: useRef
+* Use hook: useRef
+Yes, the `useRef` hook is being used in the `CurrencyInput` component to create a reference to the input field. 
+`const inputRef = useRef(null);`  
+and later, it's utilized in:  
+`useEffect(() => { inputRef.current.focus(); }, []);`
 
-* Minst 5 komponenter
+* At least 5 components.
+Yes.
+    - `App`: The root component of the application.
+    - `LayoutComponent`: Manages the layout and contains the main functionality.
+    - `CurrencyInput`: Handles the input field for entering currency values.
+    - `ConvertButton`: Represents the button used to trigger the currency conversion.
+    - `ConversionResult`: Displays the result of the currency conversion.
+    - `ErrorComponent`: Used to display error messages.
 
-* Enhetligt formaterad kod (Använd https://prettier.io/ extension i VS Code)
+* Uniformly formatted code (Use the https://prettier.io/ extension in VS Code).
+Yes, Prettier is installed and utilized:  
+<img src="./readmefiles/prettier.jpg">
